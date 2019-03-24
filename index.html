@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+
+    <base href="/" />
+
+    <title>from firebase to firestore</title>
+
+    <meta property="og:site_name" content="from firebase to firestore">
+    <meta property="og:title" content="from firebase to firestore">
+
+    <meta name="author" content="ionic zurich meetup. from firebase to firestore, the journey i had with my project unihockey.club">
+
+    <meta name="description" content="ionic zurich meetup. from firebase to firestore, the journey i've had with my project unihockey.club">
+    <meta property="og:description" content="ionic zurich meetup. from firebase to firestore, the journey i had with my project unihockey.club">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deckdeckgo.com">
+
+    <meta property="og:image" content="https://deckdeckgo.com/assets/img/deckdeckgo.png">
+    <meta property="og:image:type" content="image/png">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#3880ff">
+    <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#3880ff">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    await navigator.serviceWorker.register('/service-worker.js');
+                } catch (e) {
+                    console.warn('No service worker registered');
+                }
+            });
+        }
+    </script>
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <style>
+        /* Until Web Components are loaded, don't display content */
+        body {
+            background: #3880ff;
+        }
+
+        ion-app.loading,
+        ion-app.loading a {
+            color: transparent;
+        }
+
+        ion-app.loading a {
+            color: transparent;
+        }
+
+        ion-app.loading {
+            display: none;
+        }
+
+        .sc-ion-modal-md-h {
+            --height: 800px;
+            --width: 1200px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ion-app class="loading">
+        <ion-content force-overscroll="false" scroll-y="false">
+            <deckgo-deck id="slider" pager-percentage="false" clone-background="false">
+                <!-- BEGIN: Edit your slides -->
+
+
+                <deckgo-slide-title>
+                    <h1 slot="title" style="background: #000; --color: white;">From Firebase to Firestore</h1>
+                    <p slot="content" style="background: #000; --color: white;">
+                        the journey I've had with my project unihockey.club 🚀
+                    </p>
+                    <img slot="background" data-src="assets/bg/scharen.jpg">
+                </deckgo-slide-title>
+
+                <deckgo-slide-author img-src="assets/sandro.jpg" img-alt="Sandro">
+                    <h1 slot="title">Author</h1>
+                    <div slot="author">
+                        <h2>Sandro 🤓</h2>
+                        <p>Certified Digital Master & founder of @unihockeyclub 🚀</p>
+                        <p>I am a digital master, student and consultant currently living in Schaffhausen, Schweiz.
+                            Actually, I am working on a civictech prototype to test the egovernment use case
+                            switzerland.</p>
+
+                        <p>I love to transform innovative ideas into business value driven services and solutions
+                            using:</br>
+                            - Business Model Canvas & Lean Innovation</br>
+                            - modern web frameworks like Ionic</br>
+                            - Blockchain und Distributed-Ledger-Technologie</br>
+                            - latest technology and cloud services</br>
+                            - Business Suites like SAP</p>
+                    </div>
+                    <div slot="social-link">
+                        <deckgo-social twitter="saandr0o">
+                            <ion-icon slot="icon" name="logo-twitter"></ion-icon>twitter
+                        </deckgo-social>
+                    </div>
+                    <div slot="social-link">
+                        <deckgo-social linkedin="sandroscalco">
+                            <ion-icon slot="icon" name="logo-linkedin"></ion-icon>linkedin
+                        </deckgo-social>
+                    </div>
+                </deckgo-slide-author>
+
+
+
+                <deckgo-slide-title>
+                    <h2 slot="title" style="background: #000; --color: white;">unihockey.club</h1>
+                        <p slot="content">
+
+                            <ion-button onclick="presentModal()" shape="round" size="large">🚀</ion-button>
+
+                        </p>
+                        <img slot="background" data-src="assets/bg/randen.jpg">
+                </deckgo-slide-title>
+
+                <deckgo-slide-content reveal="true" reveal-show-first="true">
+                    <h1 slot="title">facts & figures</h1>
+                    <ul slot="content">
+                        <li>Birthday: 19.12.2016</li>
+                        <li>Users: 600+</li>
+                        <li>Pages: 45+</li>
+                        <li>Pipes: 9</li>
+                        <li>Services: 7</li>
+                        <li>Versions: infinity</li>
+                        <li>Commits: 181</li>
+                        <li>Ionic: Ionic 2 -> Ionic 3 -> soon Ionic 4</li>
+                    </ul>
+                </deckgo-slide-content>
+
+
+                <deckgo-slide-content reveal="true" reveal-show-first="true">
+                    <h1 slot="title">Agenda</h1>
+                    <ul slot="content">
+                        <li>Intro</li>
+
+                        <li>PWA | API Key in Code</li>
+                        <li>Authentication</li>
+
+                        <li>Live Update</li>
+                        <li>Queries</li>
+                        <li>Offline Data</li>
+
+                        <li>Migration</li>
+                    </ul>
+                </deckgo-slide-content>
+
+
+                <deckgo-slide-gif src="assets/firestore.png" alt="My gif" fullscreen="false">
+                    <h1 slot="title">Firebase vs Firestore</h1>
+                </deckgo-slide-gif>
+
+
+                <deckgo-slide-code language="javascript" style="--background: black;">
+                        <h1 slot="title">PWA | API Key in Code part 1</h1>
+                    <code slot="code" style="--background-image: var(--ion-color-dark);" padding>
+
+                      
+                        import {firebaseConfig} from './credentials';
+                        
+                        @NgModule({
+                        //declarations: [AppComponent, ParallaxHeaderDirective],
+                        declarations: [AppComponent],
+                        entryComponents: [],
+                        imports: [
+                        BrowserModule,
+                        IonicModule.forRoot(),
+                        AppRoutingModule,
+                        AngularFireModule.initializeApp(firebaseConfig),
+                        AngularFireAuthModule,
+                        AngularFirestoreModule.enablePersistence(),//AngularFirestoreModule,
+                        AngularFireStorageModule,
+                        NgxSoapModule,
+                        HttpClientModule,
+                        TranslateModule.forRoot({
+                        loader: {
+                        provide: TranslateLoader,
+                        useFactory: HttpLoaderFactory,
+                        deps: [HttpClient]
+                        }
+                        }),
+                        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+                        ],
+                        providers: [
+
+                        {
+                        provide: RouteReuseStrategy,
+                        useClass: IonicRouteStrategy
+                        }
+                        ],
+                        bootstrap: [AppComponent]
+                        })
+                        export class AppModule {}
+
+                    </code>
+                </deckgo-slide-code>
+
+                <deckgo-slide-code language="json"  style="--background: black;">
+                    <h1 slot="title">PWA | API Key in Code part 2</h1>
+                    <code slot="code" style="background-image: var(--ion-color-dark);" padding>
+                        // Initialize Firebase
+                        export const firebaseConfig = {
+                            apiKey: "API KEY",
+                            authDomain: "unihockeyclub.firebaseapp.com",
+                            databaseURL: "https://unihockeyclub.firebaseio.com",
+                            projectId: "project-id",
+                            storageBucket: "project-id.appspot.com",
+                            messagingSenderId: "messagingId"
+                        };
+                    </code>
+                </deckgo-slide-code>
+
+
+                <deckgo-slide-code language="json"  style="--background: black;">
+                    <h1 slot="title">PWA
+                    | API Key in Code part 3</h1>
+                    <code slot="code" style="background-image: var(--ion-color-dark);" padding>
+                        {
+                        "rules": {
+                        "newsPublic":{
+                           ".read": true
+                        },
+
+                        "events": {
+                            ".read": "auth != null",
+                            ".write": "auth != null",
+                            ".indexOn": "startDate"
+                        },
+                        "clubEvents": {
+                        "$club": {
+                            ".read": "auth != null && root.child('users').child(auth.uid).child('clubId').val() == $club",
+                            ".write": "auth != null && root.child('users').child(auth.uid).child('clubId').val() == $club",
+                            ".indexOn": "startDate"
+                        }
+                        }
+                    </code>
+                </deckgo-slide-code>
+
+                <deckgo-slide-content reveal="true" reveal-show-first="false">
+                    <h1 slot="title">PWA
+                            | API Key in Code summary</h1>
+                    <ul slot="content">
+                        <li>Disable anonymus login</li>
+                        <li>Create UserProfile Entity</li>
+                        <li>Read & Write Access with $auth.uid</li>
+                        <ul>
+                        <li>Making sure a user’s profile is only visible to the user who created it.</li>
+                        <li>Ensuring that only logged-in users can access the database.</li>
+                        <li>Securing a node so only a few set of users can see it or edit it.</li>
+                        <li>Setting up your database to be read-only and only allows yourself to write or create new data.</li>
+                        
+                        <li>so use: Authorization Rules!!!</li>
+                    </ul>
+                        <li>and.. Validation rules</li>
+                        <ul>
+                        <li>A field can only be a string.</li>
+                        <li>A field can’t have child nodes.</li>
+                        <li>A field can be created new but not edited.</li></ul>
+                        
+                        <li>
+                            <a href="https://javebratt.com/hide-firebase-api/">Blog</a>
+                        </li>
+                        
+                    </ul>
+                </deckgo-slide-content>
+                    
+                <deckgo-slide-content reveal="true" reveal-show-first="false">
+                    <h1 slot="title">Authentication</h1>
+                    <ul slot="content">
+                        <li>Disable anonymus login</li>
+                        <li>GDPR: Delete User in Authentication, replace User Profile</li>
+                        <ul>
+                            <li>therefore use own userProfile Entity</li>
+                        </ul>
+                    </ul>
+                </deckgo-slide-content>
+
+
+                <deckgo-slide-title>
+                    <h1 slot="title">Live Update</h1>
+                        <p slot="content">
+
+                            <ion-button onclick="presentModal()" shape="round" size="large">🚀</ion-button>
+
+                        </p>
+                       
+                </deckgo-slide-title>
+
+
+                <deckgo-slide-code language="javascript"  style="--background: black;">
+                    <h1 slot="title">Live Update</h1>
+                    <code slot="code" style="background-image: var(--ion-color-dark);" padding>
+                       
+                        this.gamesList.forEach((game) => {
+                          return this.ds.getGameDetail(userProfile.val().clubId, userProfile.val().team, game.id).on('child_added', gameDetail => {
+                            let updatedGame = this.gamesList.filter(element => {
+                              return element.id == game.id;
+                            })[0];
+                            //Update aus listener
+                            updatedGame[gameDetail.key] = gameDetail.val();
+                          });
+                        });
+                    </code>
+                </deckgo-slide-code>
+        
+            
+    
+                <deckgo-slide-code language="javascript"  style="--background: black;">
+                    <h1 slot="title">Queries Firebase</h1>
+                    <code slot="code" style="background-image: var(--ion-color-dark);" padding>
+                        try {
+                            this.ds.getTrainingDetail(this.navParams.get('clubId'), this.navParams.get('teamId'), this.navParams.get('trainingId')).on('value', (snapshot) => {
+                      
+                         
+                              var members = snapshot.val().member;
+                              this.joinMembers = [];
+                              this.unsubscribeMembers = [];
+                      
+                              try { // falls noch keine members vorhanden..
+                                var that = this;
+                                //alle members loopen
+                                Object.keys(snapshot.val().member).forEach(function(element) {
+                                  //profil holen
+                                  that.ds.getProfile(element).once('value', (data) => {
+                                    that.ds.getTrainerDetail(that.currentTraining.teamId, data.key).once('value', (isTrainer) => {
+                                      if (snapshot.val().member[element] === true) {
+                                        let profile = data.val();
+                                        profile.id = data.key;
+                                        profile.isTrainer = isTrainer.val();
+                                        profile.profilePictureUrl = data.val().profilePictureUrl || "https://avatars.io/gravatar/" + data.val().email;
+                                        that.joinMembers.push(profile);
+                                      } else if (snapshot.val().member[element] <= 10) {
+                                        let profile = data.val();
+                                        profile.id = data.key;
+                                        profile.isTrainer = isTrainer.val();
+                                        profile.profilePictureUrl = data.val().profilePictureUrl || "https://avatars.io/gravatar/" + data.val().email;
+                                        profile["status"] = that.ds._status[snapshot.val().member[element]];
+                                        that.unsubscribeMembers.push(profile);
+                                      }
+                                    });
+                                  });
+                                });
+                          
+                      
+                    </code>
+                </deckgo-slide-code>
+        
+               
+                                
+                <deckgo-slide-code language="javascript"  style="--background: black;">
+                    <h1 slot="title">Queries Firestore</h1>
+                    <code slot="code" style="background-image: var(--ion-color-dark);" padding>
+                        import { Injectable} from '@angular/core';
+                          import { AngularFireAuth } from '@angular/fire/auth';
+                          import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, } from '@angular/fire/firestore';
+                          import * as firebase from 'firebase/app';
+                          import { Observable, Observer } from 'rxjs';
+                          
+                          
+                          @Injectable({
+                            providedIn: 'root'
+                          })
+                          export class FireStoreService {
+                          
+                            public userProfileDoc: AngularFirestoreDocument < any > ;
+                            private newsClubListCollection: AngularFirestoreCollection < any > ;
+                            private newsTeamListCollection: AngularFirestoreCollection < any > ;
+                            private eventClubListCollection: AngularFirestoreCollection < any > ;
+                            private eventTeamListCollection: AngularFirestoreCollection < any > ;
+                            private trainingListCollection: AngularFirestoreCollection < any > ;
+                          
+                            constructor(
+                              private afAuth: AngularFireAuth,
+                              private firestore: AngularFirestore
+                            ) {
+                          
+                              this.afAuth.authState.subscribe(user => {
+                                if (user) {
+                                  this.userProfileDoc = this.firestore.collection('userProfile').doc(user.uid);
+                                  this.userProfileDoc.valueChanges().subscribe(userProfile => {
+                          
+                                    /**********************************************************************************       
+                                    / DATEN 
+                                    ********************************************************************************** */
+                                    this.newsClubListCollection = this.firestore.collection('newsList', ref => {
+                                      return ref.where('clubRef', '==', userProfile["clubRef"]);
+                                    });
+                          
+                                    this.eventClubListCollection = this.firestore.collection('eventList', ref => {
+                                      return ref.where('clubRef', '==', userProfile["clubRef"]);
+                                    });
+                                  
+                          
+                                  });
+                                }
+                              });
+                            }    
+                          }
+                    </code>
+                </deckgo-slide-code>
+        
+
+                <deckgo-slide-code language="javascript"  style="--background: black;">
+                    <h1 slot="title">Offline Data</h1>
+                    <code slot="code" style="background-image: var(--ion-color-dark);" padding>
+                        @NgModule({
+                            //declarations: [AppComponent, ParallaxHeaderDirective],
+                            declarations: [AppComponent],
+                            entryComponents: [],
+                            imports: [
+                              BrowserModule,
+                              IonicModule.forRoot(),
+                              AppRoutingModule,
+                              AngularFireModule.initializeApp(firebaseConfig),
+                              AngularFireAuthModule,
+                              AngularFirestoreModule.enablePersistence(),//AngularFirestoreModule,
+                              AngularFireStorageModule,
+                              NgxSoapModule,
+                              HttpClientModule,
+                              TranslateModule.forRoot({
+                                loader: {
+                                  provide: TranslateLoader,
+                                  useFactory: HttpLoaderFactory,
+                                  deps: [HttpClient]
+                                }
+                              }),
+                              ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+                            ],
+                            providers: [
+                          
+                              {
+                                provide: RouteReuseStrategy,
+                                useClass: IonicRouteStrategy
+                              }
+                            ],
+                            bootstrap: [AppComponent]
+                          })
+                          export class AppModule {}
+                    </code>
+                </deckgo-slide-code>
+
+                <deckgo-slide-gif style="background: white;" src="https://media.giphy.com/media/xUA7baWfTjfHGLZc3e/giphy.gif" alt="Template for gif" fullscreen="true">
+                    <h1 slot="title">NEAT :)</h1>
+                   
+                </deckgo-slide-gif>
+
+                <deckgo-slide-title>
+                    <h1 slot="title">Offline Data Demo</h1>
+                        <p slot="content">
+
+                           <p>Demo (myclub)</p>
+
+                        </p>
+                       
+                </deckgo-slide-title>
+
+                <deckgo-slide-content reveal="true" reveal-show-first="false">
+                    <h1 slot="title">Migration</h1>
+                   
+                        <ul slot="content">
+                            <li>Export Data (JSON File)</li>
+                            <li>Start with a new project</li>
+                            <li>Care about user profiles and the login/pwds</li>
+
+                            <li>Create Firebase Admin App :)</li>                          
+                        </ul>
+                    
+                </deckgo-slide-content>
+
+                <deckgo-slide-title>
+                        <h1 slot="title" style="background: #000; --color: white;">Questions?</h1>
+                        <p slot="content" style="background: #000; --color: white;">
+                            
+                        </p>
+                        <img slot="background" data-src="assets/bg/lindli.jpg">
+                    </deckgo-slide-title>
+
+
+
+                <!-- END: Edit your slides -->
+
+                <a href="#" onclick="openMenu(event)" slot="actions" style="color: inherit;">
+                    <ion-icon name="more"></ion-icon>
+                </a>
+
+            </deckgo-deck>
+
+            <deckgo-remote></deckgo-remote>
+
+        </ion-content>
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="navigation">
+            <ion-fab-button>
+                <ion-icon name="apps"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="start">
+                <ion-fab-button class="hide-on-mobile" color="primary" onclick="toggleFullScreen()">
+                    <ion-icon name="expand"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button color="primary" onclick="presentSlidePicker()">
+                    <ion-icon name="bookmark"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button color="primary" onclick="nextSlide()">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button color="primary" onclick="previousSlide()">
+                    <ion-icon name="arrow-back"></ion-icon>
+                </ion-fab-button>
+            </ion-fab-list>
+            <ion-fab-list side="top">
+                <ion-fab-button id="buttonSlideNotes" color="primary" onclick="displaySlideNotes()">
+                    <ion-icon name="clipboard"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button class="hide-on-mobile" color="primary" onclick="doPrint()">
+                    <ion-icon name="print"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button color="primary" onclick="reconnectRemoteControl()">
+                    <ion-icon name="link"></ion-icon>
+                </ion-fab-button>
+            </ion-fab-list>
+        </ion-fab>
+
+        <!-- Ionic components anchors -->
+        <ion-popover-controller></ion-popover-controller>
+        <ion-modal-controller></ion-modal-controller>
+        <ion-alert-controller></ion-alert-controller>
+
+        <web-social-share show="false" style="--web-social-share-backdrop-opacity: 0.5;">
+            <ion-icon name="logo-twitter" slot="twitter" style="color: #00aced; width: 1.4rem; height: 1.4rem;"></ion-icon>
+            <ion-icon name="logo-reddit" slot="reddit" style="width: 1.4rem; height: 1.4rem;"></ion-icon>
+            <ion-icon name="logo-linkedin" slot="linkedin" style="color: #0077b5; width: 1.4rem; height: 1.4rem;"></ion-icon>
+            <ion-icon name="mail" slot="email" style="color: #ff8ea3; width: 1.4rem; height: 1.4rem;"></ion-icon>
+            <ion-icon name="logo-whatsapp" slot="whatsapp" style="color: #25D366; width: 1.4rem; height: 1.4rem;"></ion-icon>
+        </web-social-share>
+    </ion-app>
+
+    <noscript>
+        Please enable Javascript to access this presentation.
+    </noscript>
+
+<script src="main.54240a6dde55cdf0651f.js?fa0c806046ee6d84a7b8"></script></body>
+
+</html>
